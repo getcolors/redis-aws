@@ -1,11 +1,23 @@
 {
   "version": 1,
   "skills": {
+    "package-redis-blue": {
+      "source": "getcolors/redis",
+      "sourceType": "github",
+      "skillPath": "skills/package-redis-blue/SKILL.md",
+      "computedHash": "12fd29250ca6251ed48f54d81402f6b87bea74495548846332eeac2f5c9fad93"
+    },
     "package-redis-green": {
       "source": "getcolors/redis",
       "sourceType": "github",
       "skillPath": "skills/package-redis-green/SKILL.md",
       "computedHash": "3eec8fe1ffae810abc80b2c61bab759afe8db9b2389dd6b483fd8f5ce57fb3c8"
+    },
+    "package-redis-red": {
+      "source": "getcolors/redis",
+      "sourceType": "github",
+      "skillPath": "skills/package-redis-red/SKILL.md",
+      "computedHash": "66cb9a4533c4a54b5eb37110e949a3a193a7e622bc28da996d17db5152506dcb"
     }
   }
 }
