@@ -1,0 +1,10 @@
+# tofu plan -detailed-exitcode after create 2, 2026-09-11T04:01:26Z
+## .colors/redis-aws/redis-infrastructure/nodes/0
+Error: Backend initialization required, please run "tofu init"
+plan exit=1 (0 = no changes, 2 = changes)
+## .colors/redis-aws/redis-infrastructure/shared
+Error: Backend initialization required, please run "tofu init"
+plan exit=1 (0 = no changes, 2 = changes)
+## .colors/redis-aws/redis-storage
+Plan: 0 to add, 1 to change, 0 to destroy.
+plan exit=2 (0 = no changes, 2 = changes)

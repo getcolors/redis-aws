@@ -1,0 +1,7 @@
+# local state after delete 1, 2026-09-11T04:21:34Z
+redis-aws blocks in ~/.ssh/config: 0
+Host stanzas: 6
+ls: cannot access '/home/ubuntu/.ssh/redis-aws': No such file or directory
+ls: cannot access '/home/ubuntu/.ssh/redis-aws.pub': No such file or directory
+ssh: Could not resolve hostname redis-aws: Temporary failure in name resolution
+ssh alias exit=255

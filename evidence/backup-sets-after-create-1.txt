@@ -1,0 +1,17 @@
+# backup sets after create 1 2026-09-11T03:57:31Z
+redis-aws/redis/20260911T034935Z/.complete	16
+redis-aws/redis/20260911T034935Z/dump.rdb	248
+redis-aws/redis/20260911T034935Z/manifest.txt	272
+redis-aws/redis/20260911T035615Z/.complete	16
+redis-aws/redis/20260911T035615Z/dump.rdb	248
+redis-aws/redis/20260911T035615Z/manifest.txt	272
+newest marker: redis-aws/redis/20260911T035615Z/.complete
+marker content: 20260911T035622Z
+-- manifest
+stamp=20260911T035615Z
+profile=redis-aws
+image=docker.io/library/redis:7.2.16@sha256:74566c6910d13ae61e7ce73ebd3127438a1fe805b309b097c323142719ec8a5b
+redis_version=7.2.16
+dbsize=1
+dump_sha256=e6b9a57adec4c8a1207bd6cebb545f26e04ccef097ec3ad1c5d176cf48012161
+dump_bytes=248

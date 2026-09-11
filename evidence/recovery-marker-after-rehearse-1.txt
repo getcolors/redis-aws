@@ -1,0 +1,20 @@
+# recovery marker and sets after rehearse 1, 2026-09-11T04:12:02Z
+redis-aws/.colors-recovery-verified	50	2026-09-11T04:11:49+00:00
+redis-aws/redis/20260911T034935Z/.complete	16	2026-09-11T03:49:42+00:00
+redis-aws/redis/20260911T034935Z/dump.rdb	248	2026-09-11T03:49:41+00:00
+redis-aws/redis/20260911T034935Z/manifest.txt	272	2026-09-11T03:49:41+00:00
+redis-aws/redis/20260911T035615Z/.complete	16	2026-09-11T03:56:23+00:00
+redis-aws/redis/20260911T035615Z/dump.rdb	248	2026-09-11T03:56:22+00:00
+redis-aws/redis/20260911T035615Z/manifest.txt	272	2026-09-11T03:56:22+00:00
+redis-aws/redis/20260911T040047Z/.complete	16	2026-09-11T04:00:55+00:00
+redis-aws/redis/20260911T040047Z/dump.rdb	288	2026-09-11T04:00:54+00:00
+redis-aws/redis/20260911T040047Z/manifest.txt	272	2026-09-11T04:00:54+00:00
+redis-aws/redis/20260911T041005Z/.complete	16	2026-09-11T04:10:12+00:00
+redis-aws/redis/20260911T041005Z/dump.rdb	288	2026-09-11T04:10:11+00:00
+redis-aws/redis/20260911T041005Z/manifest.txt	272	2026-09-11T04:10:11+00:00
+redis-aws/redis/20260911T041136Z/.complete	16	2026-09-11T04:11:43+00:00
+redis-aws/redis/20260911T041136Z/dump.rdb	288	2026-09-11T04:11:43+00:00
+redis-aws/redis/20260911T041136Z/manifest.txt	272	2026-09-11T04:11:43+00:00
+-- marker head-object
+50	2026-09-11T04:11:49+00:00	AES256
+-- marker content: redis-aws set=20260911T041136Z at=20260911T041148Z

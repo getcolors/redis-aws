@@ -1,0 +1,11 @@
+# explicit absence checks after delete 1, 2026-09-11T04:21:19Z
+instance: terminated
+vpc: 
+sg: 
+key pair: 
+iam user: 
+head-bucket redis-aws-state-251213589273-us-east-1: 
+head-bucket redis-aws-backup-251213589273-us-east-1: 
+buckets named redis-aws*: []
+volumes tagged/named redis-aws: []
+elastic ips: []

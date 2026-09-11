@@ -1,0 +1,97 @@
+# aws verification (after-create-1-failure) 2026-09-11T03:41:52Z account 251213589273
+## EC2 instances (Name=redis-aws*)
+[
+    {
+        "id": "i-069d0643337a3edd3",
+        "state": "running",
+        "type": "t3.small",
+        "ami": "ami-025d99823a4caad37",
+        "az": "us-east-1a",
+        "ip": "54.227.190.72",
+        "key": "redis-aws",
+        "vpc": "vpc-0baaf3bcb24665975",
+        "subnet": "subnet-071d27c1c5af9c91f",
+        "sgs": [
+            "sg-0f394d6600edd0165"
+        ],
+        "root": [
+            "vol-01f130643b129a29d"
+        ],
+        "tags": [
+            {
+                "Key": "Name",
+                "Value": "redis-aws"
+            }
+        ]
+    }
+]
+## root volume size
+vol-01f130643b129a29d	20	gp3	True
+## security groups (redis-aws*)
+[
+    {
+        "id": "sg-0f394d6600edd0165",
+        "name": "redis-aws-firewall",
+        "vpc": "vpc-0baaf3bcb24665975",
+        "ingress": [
+            {
+                "IpProtocol": "tcp",
+                "FromPort": 22,
+                "ToPort": 22,
+                "UserIdGroupPairs": [],
+                "IpRanges": [
+                    {
+                        "CidrIp": "0.0.0.0/0"
+                    }
+                ],
+                "Ipv6Ranges": [],
+                "PrefixListIds": []
+            }
+        ],
+        "egress": [
+            {
+                "IpProtocol": "-1",
+                "UserIdGroupPairs": [],
+                "IpRanges": [
+                    {
+                        "CidrIp": "0.0.0.0/0"
+                    }
+                ],
+                "Ipv6Ranges": [],
+                "PrefixListIds": []
+            }
+        ]
+    }
+]
+## VPCs / subnets (Name=redis-aws*)
+vpc-0baaf3bcb24665975	10.79.0.0/16	available
+subnet-071d27c1c5af9c91f	10.79.1.0/24	us-east-1a	vpc-0baaf3bcb24665975
+## key pairs (redis-aws*)
+key-03bdffd3fe4c07760	redis-aws	ed25519	P+Ae5/K2a+fnLTjgEIAjy6mIASPd10yQQme2kdSoi90=
+## buckets
+redis-aws-state-251213589273-us-east-1: present
+redis-aws-backup-251213589273-us-east-1: ABSENT (head-bucket failed)
+## backup bucket tagging / public access block / encryption
+
+aws: [ERROR]: An error occurred (NoSuchBucket) when calling the GetBucketTagging operation: The specified bucket does not exist
+
+aws: [ERROR]: An error occurred (NoSuchBucket) when calling the GetPublicAccessBlock operation: The specified bucket does not exist
+
+aws: [ERROR]: An error occurred (NoSuchBucket) when calling the GetBucketEncryption operation: The specified bucket does not exist
+## IAM user redis-aws-storage-backup
+
+aws: [ERROR]: An error occurred (NoSuchEntity) when calling the GetUser operation: The user with name redis-aws-storage-backup cannot be found.
+
+aws: [ERROR]: An error occurred (NoSuchEntity) when calling the ListUserPolicies operation: The user with name redis-aws-storage-backup cannot be found.
+
+aws: [ERROR]: An error occurred (NoSuchEntity) when calling the GetUserPolicy operation: The user with name redis-aws-storage-backup cannot be found.
+
+aws: [ERROR]: An error occurred (NoSuchEntity) when calling the ListAccessKeys operation: The user with name redis-aws-storage-backup cannot be found.
+## backup bucket objects
+
+aws: [ERROR]: An error occurred (NoSuchBucket) when calling the ListObjectsV2 operation: The specified bucket does not exist
+## state bucket objects
+_colors/backend-owner.json	161
+redis-aws/compute/coordination.json	731
+redis-aws/compute/nodes/0.tfstate	3697
+redis-aws/compute/shared.tfstate	9919

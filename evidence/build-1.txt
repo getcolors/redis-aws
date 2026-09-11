@@ -1,0 +1,17 @@
+Checking out: https://github.com/getcolors/redis.git at 579519367a37cc2797b004469481b78bbccc654c
+>>> :redis/start (build)
+<<< :redis/start (0ms)
+>>> :redis/infrastructure (build)
+<<< :redis/infrastructure (10ms)
+>>> :redis/storage (build)
+<<< :redis/storage (4ms)
+>>> :redis/ssh-config (build)
+<<< :redis/ssh-config (23ms)
+>>> :redis/ansible (build)
+<<< :redis/ansible (22ms)
+>>> :redis/acceptance (build)
+<<< :redis/acceptance (0ms)
+
+real	0m2.917s
+user	0m3.804s
+sys	0m0.541s

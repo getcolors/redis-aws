@@ -1,0 +1,8 @@
+start 2026-09-11T04:11:11Z
+>>> :redis/start (rehearse)
+<<< :redis/start (1ms)
+>>> :redis/load-infrastructure (rehearse)
+<<< :redis/load-infrastructure (18672ms)
+>>> :redis/rehearsal (rehearse)
+<<< :redis/rehearsal (17976ms)
+EXIT=0 ELAPSED=38s end 2026-09-11T04:11:49Z

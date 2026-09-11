@@ -1,0 +1,4 @@
+# ssh config after create 2 (run 2 started 2026-09-11T03:57:53Z = 05:57:53 local)
+/home/ubuntu/.ssh/config mtime=2026-09-11 05:47:51.274410439 +0200
+/home/ubuntu/.ssh/redis-aws mtime=2026-09-11 05:39:35.641200065 +0200
+Host stanzas: 7; redis-aws blocks: 1

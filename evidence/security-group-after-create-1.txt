@@ -1,0 +1,34 @@
+# security group sg-0f394d6600edd0165 2026-09-11T03:57:50Z
+[
+    {
+        "id": "sg-0f394d6600edd0165",
+        "name": "redis-aws-firewall",
+        "vpc": "vpc-0baaf3bcb24665975",
+        "tags": [
+            {
+                "Key": "Name",
+                "Value": "redis-aws-firewall"
+            }
+        ],
+        "ingress": [
+            {
+                "proto": "tcp",
+                "from": 22,
+                "to": 22,
+                "cidrs": [
+                    "0.0.0.0/0"
+                ]
+            }
+        ],
+        "egress": [
+            {
+                "proto": "-1",
+                "from": null,
+                "to": null,
+                "cidrs": [
+                    "0.0.0.0/0"
+                ]
+            }
+        ]
+    }
+]

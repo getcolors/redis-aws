@@ -1,0 +1,16 @@
+# ~/.ssh/config block and key files 2026-09-11T03:57:29Z
+# BEGIN redis-aws ANSIBLE MANAGED BLOCK
+Host redis-aws
+    HostName 54.227.190.72
+    User ubuntu
+    Port 22
+    IdentityFile ~/.ssh/redis-aws
+    IdentitiesOnly yes
+    StrictHostKeyChecking accept-new
+    ForwardAgent no
+# END redis-aws ANSIBLE MANAGED BLOCK
+Host stanzas in ~/.ssh/config: 7
+600 ubuntu /home/ubuntu/.ssh/config 2026-09-11 05:47:51.274410439 +0200
+600 ubuntu /home/ubuntu/.ssh/redis-aws 2026-09-11 05:39:35.641200065 +0200
+600 ubuntu /home/ubuntu/.ssh/redis-aws.pub 2026-09-11 05:39:35.642465290 +0200
+public key type: ssh-ed25519

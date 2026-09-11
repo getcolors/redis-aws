@@ -1,0 +1,28 @@
+# ssh redis-aws redis-status after rehearse 1, 2026-09-11T04:12:24Z
+== monitor ==
+{"checked": "2026-09-11T04:10:15Z", "healthy": true, "problems": []}
+== backup sets in redis-aws-backup-251213589273-us-east-1/redis-aws/redis (completed, newest last) ==
+20260911T034935Z
+20260911T035615Z
+20260911T040047Z
+20260911T041005Z
+20260911T041136Z
+
+== recovery marker ==
+.colors-recovery-verified    redis-aws set=20260911T041136Z at=20260911T041148Z
+
+== container ==
+redis-redis-1 running Up 2 minutes (healthy)
+
+== connect ==
+from your workstation:
+  ssh -L 6379:127.0.0.1:6379 redis-aws
+  REDISCLI_AUTH=$(ssh redis-aws sudo -n cat /etc/redis/secrets/password) redis-cli -p 6379
+the generated password lives on this host only:
+  /etc/redis/secrets/password
+exit=0
+-- rehearsal journal (restore-check lines)
+total 12
+drwxr-xr-x  2 root root 4096 Sep 11 03:49 .
+drwxr-xr-x 49 root root 4096 Sep 11 03:48 ..
+-rw-r--r--  1 root root   68 Sep 11 04:10 redis-monitor.json

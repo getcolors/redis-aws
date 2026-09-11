@@ -1,0 +1,60 @@
+aws_iam_user.application["backup"]: Refreshing state... [id=redis-aws-storage-backup]
+aws_s3_bucket.application["backup"]: Refreshing state... [id=redis-aws-backup-251213589273-us-east-1]
+aws_iam_user_policy.application["backup"]: Refreshing state... [id=redis-aws-storage-backup:redis-bucket]
+aws_s3_bucket_public_access_block.application["backup"]: Refreshing state... [id=redis-aws-backup-251213589273-us-east-1]
+aws_s3_bucket_server_side_encryption_configuration.application["backup"]: Refreshing state... [id=redis-aws-backup-251213589273-us-east-1]
+aws_iam_access_key.application["backup"]: Refreshing state... [id=AKIA…(storage user key id, redacted; destroyed with the user)]
+
+OpenTofu used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  ~ update in-place (current -> planned)
+
+OpenTofu will perform the following actions:
+
+  # aws_s3_bucket_server_side_encryption_configuration.application["backup"] will be updated in-place
+  ~ resource "aws_s3_bucket_server_side_encryption_configuration" "application" {
+        id     = "redis-aws-backup-251213589273-us-east-1"
+        # (2 unchanged attributes hidden)
+
+      - rule {
+          - blocked_encryption_types = [
+              - "SSE-C",
+            ] -> null
+          - bucket_key_enabled       = false -> null
+
+          - apply_server_side_encryption_by_default {
+              - sse_algorithm = "AES256" -> null
+            }
+        }
+      + rule {
+          + blocked_encryption_types = []
+
+          + apply_server_side_encryption_by_default {
+              + sse_algorithm = "AES256"
+            }
+        }
+    }
+
+Plan: 0 to add, 1 to change, 0 to destroy.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+─────────────────────────────────────────────────────────────────────────────
+
+Note: You didn't use the -out option to save this plan, so OpenTofu can't

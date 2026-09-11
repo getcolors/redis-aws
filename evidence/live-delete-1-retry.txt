@@ -1,0 +1,17 @@
+start 2026-09-11T04:17:03Z pin ffb0777 (authorized delete, retry)
+Checking out: https://github.com/getcolors/redis.git at ffb0777f9d4099b6924b69eaf654f0c1652bfed1
+>>> :redis/start (delete)
+<<< :redis/start (0ms)
+>>> :redis/load-infrastructure (delete)
+<<< :redis/load-infrastructure (15526ms)
+>>> :redis/ansible (delete)
+<<< :redis/ansible (5378ms)
+>>> :redis/ssh-config (delete)
+<<< :redis/ssh-config (2111ms)
+>>> :redis/infrastructure (delete)
+<<< :redis/infrastructure (144755ms)
+>>> :redis/storage (delete)
+<<< :redis/storage (13945ms)
+>>> :redis/backend-finalize (delete)
+<<< :redis/backend-finalize (23414ms)
+EXIT=0 ELAPSED=208s end 2026-09-11T04:20:31Z

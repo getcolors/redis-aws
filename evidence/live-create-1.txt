@@ -1,0 +1,14 @@
+>>> :redis/start (create)
+<<< :redis/start (3ms)
+>>> :redis/infrastructure (create)
+>>> :colors-compute/dispatch (create)
+<<< :colors-compute/dispatch (0ms)
+>>> :colors-compute/node (create)
+<<< :colors-compute/node (41879ms)
+>>> :colors-compute/join (create)
+<<< :colors-compute/join (0ms)
+<<< :redis/infrastructure (130297ms)
+>>> :redis/storage (create)
+<<< :redis/storage (6690ms)
+managed S3 storage failed; inspect bucket ownership, state access, and AWS permissions
+EXIT=1 ELAPSED=138s

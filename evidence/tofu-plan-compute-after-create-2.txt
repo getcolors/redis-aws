@@ -1,0 +1,12 @@
+# compute stages: tofu init then plan -detailed-exitcode, 2026-09-11T04:02:09Z
+## .colors/redis-aws/redis-infrastructure/shared
+init exit=0
+  # aws_key_pair.machine must be replaced
+Plan: 1 to add, 0 to change, 1 to destroy.
+plan exit=2
+## .colors/redis-aws/redis-infrastructure/nodes/0
+init exit=0
+  # aws_instance.node must be replaced
+Plan: 1 to add, 0 to change, 1 to destroy.
+Error: Resource instance cannot be destroyed
+plan exit=1

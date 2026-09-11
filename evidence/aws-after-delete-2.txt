@@ -1,0 +1,55 @@
+# aws verification (after-delete-2) 2026-09-11T04:22:17Z account 251213589273
+## EC2 instances (Name=redis-aws*)
+[
+    {
+        "id": "i-069d0643337a3edd3",
+        "state": "terminated",
+        "type": "t3.small",
+        "ami": "ami-025d99823a4caad37",
+        "az": "us-east-1a",
+        "ip": null,
+        "key": "redis-aws",
+        "vpc": null,
+        "subnet": null,
+        "sgs": [],
+        "root": [],
+        "tags": [
+            {
+                "Key": "Name",
+                "Value": "redis-aws"
+            }
+        ]
+    }
+]
+## root volume size
+## security groups (redis-aws*)
+[]
+## VPCs / subnets (Name=redis-aws*)
+## key pairs (redis-aws*)
+
+aws: [ERROR]: An error occurred (InvalidKeyPair.NotFound) when calling the DescribeKeyPairs operation: The key pair 'redis-aws' does not exist
+## buckets
+redis-aws-state-251213589273-us-east-1: ABSENT (head-bucket failed)
+redis-aws-backup-251213589273-us-east-1: ABSENT (head-bucket failed)
+## backup bucket tagging / public access block / encryption
+
+aws: [ERROR]: An error occurred (NoSuchBucket) when calling the GetBucketTagging operation: The specified bucket does not exist
+
+aws: [ERROR]: An error occurred (NoSuchBucket) when calling the GetPublicAccessBlock operation: The specified bucket does not exist
+
+aws: [ERROR]: An error occurred (NoSuchBucket) when calling the GetBucketEncryption operation: The specified bucket does not exist
+## IAM user redis-aws-storage-backup
+
+aws: [ERROR]: An error occurred (NoSuchEntity) when calling the GetUser operation: The user with name redis-aws-storage-backup cannot be found.
+
+aws: [ERROR]: An error occurred (NoSuchEntity) when calling the ListUserPolicies operation: The user with name redis-aws-storage-backup cannot be found.
+
+aws: [ERROR]: An error occurred (NoSuchEntity) when calling the GetUserPolicy operation: The user with name redis-aws-storage-backup cannot be found.
+
+aws: [ERROR]: An error occurred (NoSuchEntity) when calling the ListAccessKeys operation: The user with name redis-aws-storage-backup cannot be found.
+## backup bucket objects
+
+aws: [ERROR]: An error occurred (NoSuchBucket) when calling the ListObjectsV2 operation: The specified bucket does not exist
+## state bucket objects
+
+aws: [ERROR]: An error occurred (NoSuchBucket) when calling the ListObjectsV2 operation: The specified bucket does not exist

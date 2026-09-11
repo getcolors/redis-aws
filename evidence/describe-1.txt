@@ -1,0 +1,9 @@
+start 2026-09-11T04:10:47Z
+>>> :redis/start (describe)
+<<< :redis/start (0ms)
+>>> :redis/load-infrastructure (describe)
+<<< :redis/load-infrastructure (15755ms)
+>>> :redis/describe (describe)
+redis-aws                        ok         2026-09-11T04:10:15Z
+<<< :redis/describe (1250ms)
+EXIT=0 ELAPSED=18s

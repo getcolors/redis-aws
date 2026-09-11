@@ -1,0 +1,12 @@
+# baseline 2026-09-11T03:38:38Z
+## instances tagged colors:profile=redis-aws or Name=redis-aws*
+## vpcs
+## security groups
+## key pairs
+## buckets
+## iam user
+
+aws: [ERROR]: An error occurred (NoSuchEntity) when calling the GetUser operation: The user with name redis-aws-storage-backup cannot be found.
+## ssh
+no redis-aws in ~/.ssh/config
+ls: cannot access '/home/ubuntu/.ssh/redis-aws*': No such file or directory

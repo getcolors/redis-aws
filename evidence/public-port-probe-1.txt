@@ -1,0 +1,4 @@
+# bounded TCP probe to 54.227.190.72:6379 2026-09-11T03:57:24Z (must fail)
+probe exit=124 (non-zero = closed, as required)
+# port 22 for contrast
+ssh port exit=0

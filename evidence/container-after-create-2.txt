@@ -1,0 +1,5 @@
+# container after create 2 2026-09-11T04:01:35Z
+/redis-redis-1 created=2026-09-11T03:49:09.472728858Z started=2026-09-11T04:00:36.098145755Z restarts=0 status=running
+LISTEN 0      4096   127.0.0.1:6379 0.0.0.0:*
+# baseline after create 1:
+/redis-redis-1 image=docker.io/library/redis:7.2.16@sha256:74566c6910d13ae61e7ce73ebd3127438a1fe805b309b097c323142719ec8a5b created=2026-09-11T03:49:09.472728858Z started=2026-09-11T03:56:04.377500712Z restarts=0 status=running

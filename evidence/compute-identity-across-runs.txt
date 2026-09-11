@@ -1,0 +1,100 @@
+# compute identity across runs (create at 03:41 failed at storage, 03:45 failed at acceptance, 03:53 passed, 03:57 passed)
+## aws-after-create-1-failure.txt
+ "id": "i-069d0643337a3edd3",
+ "ip": "54.227.190.72",
+ "subnet": "subnet-071d27c1c5af9c91f",
+ "vol-01f130643b129a29d"
+key-03bdffd3fe4c07760	redis-aws	ed25519	P+Ae5/K2a+fnLTjgEIAjy6mIASPd10yQQme2kdSoi90=
+subnet-071d27c1c5af9c91f	10.79.1.0/24	us-east-1a	vpc-0baaf3bcb24665975
+vol-01f130643b129a29d	20	gp3	True
+## aws-after-create-1.txt
+ "id": "i-069d0643337a3edd3",
+ "ip": "54.227.190.72",
+ "subnet": "subnet-071d27c1c5af9c91f",
+ "vol-01f130643b129a29d"
+igw-097fe6d2d931020e5
+key-03bdffd3fe4c07760	redis-aws	ed25519	P+Ae5/K2a+fnLTjgEIAjy6mIASPd10yQQme2kdSoi90=
+subnet-071d27c1c5af9c91f	10.79.1.0/24	us-east-1a	vpc-0baaf3bcb24665975
+vol-01f130643b129a29d	20	gp3	True
+## aws-after-create-2.txt
+ "id": "i-069d0643337a3edd3",
+ "ip": "54.227.190.72",
+ "subnet": "subnet-071d27c1c5af9c91f",
+ "vol-01f130643b129a29d"
+igw-097fe6d2d931020e5
+key-03bdffd3fe4c07760	redis-aws	ed25519	P+Ae5/K2a+fnLTjgEIAjy6mIASPd10yQQme2kdSoi90=
+subnet-071d27c1c5af9c91f	10.79.1.0/24	us-east-1a	vpc-0baaf3bcb24665975
+vol-01f130643b129a29d	20	gp3	True
+## launch time
+i-069d0643337a3edd3	2026-09-11T03:40:54+00:00	redis-aws	running
+## diff of the two post-success inventories (timestamps aside)
+30c30,96
+< []
+---
+> [
+>     {
+>         "id": "sg-0a0a990acfcee379f",
+>         "name": "default",
+>         "vpc": "vpc-0baaf3bcb24665975",
+>         "ingress": [
+>             {
+>                 "IpProtocol": "-1",
+>                 "UserIdGroupPairs": [
+>                     {
+>                         "UserId": "251213589273",
+>                         "GroupId": "sg-0a0a990acfcee379f"
+>                     }
+>                 ],
+>                 "IpRanges": [],
+>                 "Ipv6Ranges": [],
+>                 "PrefixListIds": []
+>             }
+>         ],
+>         "egress": [
+>             {
+>                 "IpProtocol": "-1",
+>                 "UserIdGroupPairs": [],
+>                 "IpRanges": [
+>                     {
+>                         "CidrIp": "0.0.0.0/0"
+>                     }
+>                 ],
+>                 "Ipv6Ranges": [],
+>                 "PrefixListIds": []
+>             }
+>         ]
+>     },
+>     {
+>         "id": "sg-0f394d6600edd0165",
+>         "name": "redis-aws-firewall",
+>         "vpc": "vpc-0baaf3bcb24665975",
+>         "ingress": [
+>             {
+>                 "IpProtocol": "tcp",
+>                 "FromPort": 22,
+>                 "ToPort": 22,
+>                 "UserIdGroupPairs": [],
+>                 "IpRanges": [
+>                     {
+>                         "CidrIp": "0.0.0.0/0"
+>                     }
+>                 ],
+>                 "Ipv6Ranges": [],
+>                 "PrefixListIds": []
+>             }
+>         ],
+>         "egress": [
+>             {
+>                 "IpProtocol": "-1",
+>                 "UserIdGroupPairs": [],
+>                 "IpRanges": [
+>                     {
+>                         "CidrIp": "0.0.0.0/0"
+>                     }
+>                 ],
+>                 "Ipv6Ranges": [],
+>                 "PrefixListIds": []
+>             }
+>         ]
+>     }
+> ]

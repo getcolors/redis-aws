@@ -1,0 +1,16 @@
+# final absence checks after delete 2, 2026-09-11T04:22:46Z, account 251213589273
+instance i-069d0643337a3edd3: terminated
+vpc vpc-0baaf3bcb24665975: aws: [ERROR]: An error occurred (InvalidVpcID.NotFound) when calling the DescribeVpcs operation: The vpc ID 'vpc-0baaf3bcb24665975' does not exist
+subnet subnet-071d27c1c5af9c91f: aws: [ERROR]: An error occurred (InvalidSubnetID.NotFound) when calling the DescribeSubnets operation: The subnet ID 'subnet-071d27c1c5af9c91f' does not exist
+igw igw-097fe6d2d931020e5: aws: [ERROR]: An error occurred (InvalidInternetGatewayID.NotFound) when calling the DescribeInternetGateways operation: The internetGateway ID 'igw-097fe6d2d931020e5' does not exist
+sg sg-0f394d6600edd0165: aws: [ERROR]: An error occurred (InvalidGroup.NotFound) when calling the DescribeSecurityGroups operation: The security group 'sg-0f394d6600edd0165' does not exist
+key pair redis-aws: aws: [ERROR]: An error occurred (InvalidKeyPair.NotFound) when calling the DescribeKeyPairs operation: The key pair 'redis-aws' does not exist
+volume vol-01f130643b129a29d: aws: [ERROR]: An error occurred (InvalidVolume.NotFound) when calling the DescribeVolumes operation: The volume 'vol-01f130643b129a29d' does not exist.
+iam user redis-aws-storage-backup: aws: [ERROR]: An error occurred (NoSuchEntity) when calling the GetUser operation: The user with name redis-aws-storage-backup cannot be found.
+head-bucket redis-aws-state-251213589273-us-east-1: aws: [ERROR]: An error occurred (404) when calling the HeadBucket operation: Not Found
+head-bucket redis-aws-backup-251213589273-us-east-1: aws: [ERROR]: An error occurred (404) when calling the HeadBucket operation: Not Found
+buckets named redis-aws*: []
+instances tagged Name=redis-aws (any state): i-069d0643337a3edd3	terminated 
+vpcs/sgs/keypairs/volumes named redis-aws*: [] [] [] []
+iam users named redis-aws*: []
+local: redis-aws in ~/.ssh/config = 0; key files: ls: cannot access '/home/ubuntu/.ssh/redis-aws*': No such file or directory

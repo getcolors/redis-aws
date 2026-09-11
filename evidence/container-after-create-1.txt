@@ -1,0 +1,10 @@
+# container after create 1 2026-09-11T03:57:29Z
+/redis-redis-1 image=docker.io/library/redis:7.2.16@sha256:74566c6910d13ae61e7ce73ebd3127438a1fe805b309b097c323142719ec8a5b created=2026-09-11T03:49:09.472728858Z started=2026-09-11T03:56:04.377500712Z restarts=0 status=running
+-- listeners on 6379 (kernel)
+LISTEN 0      4096   127.0.0.1:6379 0.0.0.0:*
+-- ufw
+Status: inactive
+-- host
+ip-10-79-1-68
+Ubuntu 24.04.4 LTS
+2026-09-11 03:41:00
