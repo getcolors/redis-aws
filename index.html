@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="The redis-aws deployment: desired state for one Redis 7.2 server on one AWS EC2 instance in us-east-1, loopback only, SSH tunnel client path, deployment-owned S3 state and backup buckets.">
+  <title>redis-aws</title>
+  <style>
+    :root{color-scheme:light;--ink:#1f2328;--muted:#59636e;--line:#d0d7de;--soft:#f6f8fa;--blue:#0969da;--green:#1a7f37}*{box-sizing:border-box}body{margin:0;color:var(--ink);font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}main{max-width:920px;margin:auto;padding:64px 28px 100px}h1{font-size:48px;line-height:1.05;margin:0}h2{margin-top:54px;padding-bottom:8px;border-bottom:1px solid var(--line)}.lead{font-size:20px;color:var(--muted);max-width:790px}code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}pre{padding:18px;overflow:auto;border:1px solid var(--line);border-radius:8px;background:var(--soft)}:not(pre)>code{padding:.12em .35em;border-radius:5px;background:var(--soft)}a{color:var(--blue)}.eyebrow{color:var(--green);font-weight:700;letter-spacing:.08em}.callout{padding:16px 18px;border-left:4px solid var(--green);background:#dafbe1}@media(max-width:650px){main{padding-top:38px}h1{font-size:36px}}
+  </style>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4VKP1WY4QJ"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-4VKP1WY4QJ',{page_title:'redis-aws'});</script>
+<script src="https://rybbit.getcolors.ai/api/script.js" data-site-id="9fb9c41a6d49" defer></script>
+</head>
+<body><main>
+  <p class="eyebrow">DEPLOYMENT · AWS · REDIS</p>
+  <h1>redis-aws</h1>
+  <p class="lead">Desired state for one Redis 7.2 server on one AWS EC2 instance in us-east-1, converged by the <a href="https://github.com/getcolors/redis">redis</a> Package Skill: loopback only, an SSH tunnel as the client path, an append-only file for persistence, and RDB backup sets in a deployment-owned S3 bucket with a rehearsed restore.</p>
+  <div class="callout"><strong>Desired state only.</strong> This repository is a <code>colors.yml</code>, three installed launchers, an <code>.envrc</code> and a <code>devenv.nix</code>. Everything else is generated under <code>.colors/</code> or secret in <code>.envrc.private</code>.</div>
+  <h2>Use</h2>
+  <p>Pick <code>./green</code>, <code>./red</code> or <code>./blue</code>; all three converge the same desired state.</p>
+  <pre><code>./green build
+./green create --dry-run
+./green create
+./green describe
+./green rehearse</code></pre>
+  <h2>What create owns</h2>
+  <p>One <code>t3.small</code> in <code>us-east-1a</code> inside a dedicated VPC, a security group that opens 22 alone, the machine keypair, the OpenTofu state bucket <code>redis-aws-state-251213589273-us-east-1</code> and the backup bucket <code>redis-aws-backup-251213589273-us-east-1</code>. Delete removes all of it, buckets included.</p>
+  <h2>Connecting</h2>
+  <pre><code>ssh -L 6379:127.0.0.1:6379 redis-aws
+REDISCLI_AUTH=$(ssh redis-aws cat /etc/redis/secrets/password) redis-cli -p 6379</code></pre>
+  <h2>Recovery</h2>
+  <p>A restart recovers from the append-only file, proven on every converge. RDB sets land every six hours under <code>redis-aws/redis/</code> in the backup bucket with completion markers; <code>./green rehearse</code> restores the newest into a scratch instance of the pinned image, reads the smoke key back, and writes <code>.colors-recovery-verified</code>.</p>
+  <p><a href="https://github.com/getcolors/redis-aws">Source on GitHub</a> · <a href="https://github.com/getcolors/redis">The redis Package Skill</a></p>
+</main></body>
+</html>

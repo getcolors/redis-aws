@@ -1,0 +1,98 @@
+# Desired state for redis-aws. Non-secret values only.
+# Credentials belong in the gitignored .envrc.private as COLORS_PAR_* variables.
+# Never export COLORS_PAR_PROFILE: it selects this deployment's remote state.
+#
+# Required credentials:
+#   AWS              COLORS_PAR_AWS_ACCESS_KEY_ID
+#                    COLORS_PAR_AWS_SECRET_ACCESS_KEY
+#                    (.envrc maps the pair onto AWS_ACCESS_KEY_ID and
+#                    AWS_SECRET_ACCESS_KEY, so the compute provider, the
+#                    S3 state backend and the package's storage stage all
+#                    read the same ambient AWS credential chain)
+#
+# There is no DNS provider and no public Redis port: Redis is published on
+# loopback only, the security group opens 22 alone, and the client path is
+# an SSH tunnel (ssh -L 6379:127.0.0.1:6379 redis-aws). The password is
+# generated on the server during convergence (create-once at
+# /etc/redis/secrets/password) and is never operator-supplied.
+#
+# Both S3 buckets below are deployment-owned, the way the machine keypair is
+# owned in keygen mode: the package creates them on the first create and
+# `delete` removes them. The OpenTofu state bucket comes from the library's
+# managed backend (s3-bucket-mode: managed); the backup bucket comes from
+# the package's storage stage (redis-storage-managed: true). Neither exists
+# before the first create, and nothing survives a delete.
+
+profile: redis-aws
+workdir: .colors
+
+provider-compute: aws
+provider-backend: s3
+
+# Preserve this guard in committed desired state. Destruction requires an
+# explicitly authorized one-run override; never edit this flag to bypass it.
+compute-prevent-destroy: true
+
+# --- Redis --------------------------------------------------------------------
+
+# Redis 7.2, pinned by digest: Docker Hub republishes the 7.2 and 7.2.16 tags
+# whenever the base image is rebuilt, so a tag alone does not pin bytes. The
+# same image redis-vultr runs. The server runs with maxmemory-policy
+# noeviction and an append-only file (appendfsync everysec) on a named
+# volume, so a restart keeps every acknowledged write older than a second.
+redis-image: docker.io/library/redis:7.2.16@sha256:74566c6910d13ae61e7ce73ebd3127438a1fe805b309b097c323142719ec8a5b
+redis-port: 6379
+
+# --- Backups in S3 ------------------------------------------------------------
+
+# The package's storage stage creates and owns the backup bucket, and
+# `delete` destroys it together with every set inside. The redis-backup-r2-*
+# keys are the package's storage names; with an S3 endpoint and region they
+# address native S3.
+redis-storage-managed: true
+
+# RDB snapshot sets under redis-aws/redis/<stamp>/ in the backup bucket.
+# Each set has a completion protocol (snapshot -> verified -> manifest ->
+# .complete; restore picks only completed sets). `./green rehearse` restores
+# the newest set into a scratch instance of the pinned image and reads the
+# smoke key back, then writes redis-aws/.colors-recovery-verified.
+redis-backup-r2-bucket: redis-aws-backup-251213589273-us-east-1
+redis-backup-r2-endpoint: https://s3.us-east-1.amazonaws.com
+redis-backup-r2-region: us-east-1
+redis-backup-oncalendar: "*-*-* 00/6:00:00"
+redis-backup-retention-days: 7
+# A newest completed set older than this fails the monitor (and `describe`).
+redis-backup-max-age-hours: 8
+
+# --- OpenTofu state backend ---------------------------------------------------
+
+# Managed mode: the library creates the state bucket on the first create and
+# removes it on delete. Bucket names are global, so the account id and the
+# region are part of the name.
+s3-bucket: redis-aws-state-251213589273-us-east-1
+s3-region: us-east-1
+s3-bucket-mode: managed
+
+# --- AWS ----------------------------------------------------------------------
+
+# No aws-name: per workspace standards/compute-name.md the instance, its
+# security group and its network are named after the profile: redis-aws.
+aws-region: us-east-1
+aws-availability-zone: us-east-1a
+# Ubuntu 24.04 LTS amd64 in us-east-1; the same AMI neon-multi-node-aws runs.
+aws-image-id: ami-025d99823a4caad37
+# 2 vCPU / 2 GiB: Redis is single-threaded and this is a cache/queue tier.
+aws-instance-type: t3.small
+aws-root-volume-size-gb: 20
+# A dedicated VPC and one subnet for this deployment alone.
+aws-vpc-cidr: 10.79.0.0/16
+aws-subnet-cidr: 10.79.1.0/24
+# No aws-ssh-authorized-keys: keygen mode per workspace
+# standards/ssh-keypair.md. The package generates and owns ~/.ssh/redis-aws
+# and registers the key pair named after the profile. Setting
+# aws-ssh-authorized-keys here would switch this deployment to opt-out mode.
+
+# SSH is the only open port: convergence, recovery, and the supported client
+# path (the tunnel) all ride it.
+redis-ssh-sources:
+  - 0.0.0.0/0
