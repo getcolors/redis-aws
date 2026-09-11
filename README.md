@@ -47,7 +47,7 @@ Neither bucket exists before the first create. Both are removed by delete.
 
 ```sh
 ssh -L 6379:127.0.0.1:6379 redis-aws
-REDISCLI_AUTH=$(ssh redis-aws cat /etc/redis/secrets/password) redis-cli -p 6379
+REDISCLI_AUTH=$(ssh redis-aws sudo -n cat /etc/redis/secrets/password) redis-cli -p 6379
 ssh redis-aws redis-status
 ```
 

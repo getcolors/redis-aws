@@ -23,7 +23,8 @@ no verb can run here.
   wrote.
 - **The client path is a tunnel**: `ssh -L 6379:127.0.0.1:6379 redis-aws`,
   then `redis-cli -p 6379` with the password read over SSH from
-  `/etc/redis/secrets/password`. There is no DNS record and no public port.
+  `/etc/redis/secrets/password` (`sudo -n cat`: the AMI logs in as `ubuntu`,
+  not root). There is no DNS record and no public port.
 - **Both S3 buckets are deployment-owned.** The state bucket
   `redis-aws-state-251213589273-us-east-1` comes from the library's managed
   backend (`s3-bucket-mode: managed`); the backup bucket

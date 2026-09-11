@@ -28,7 +28,7 @@
   <p>One <code>t3.small</code> in <code>us-east-1a</code> inside a dedicated VPC, a security group that opens 22 alone, the machine keypair, the OpenTofu state bucket <code>redis-aws-state-251213589273-us-east-1</code> and the backup bucket <code>redis-aws-backup-251213589273-us-east-1</code>. Delete removes all of it, buckets included.</p>
   <h2>Connecting</h2>
   <pre><code>ssh -L 6379:127.0.0.1:6379 redis-aws
-REDISCLI_AUTH=$(ssh redis-aws cat /etc/redis/secrets/password) redis-cli -p 6379</code></pre>
+REDISCLI_AUTH=$(ssh redis-aws sudo -n cat /etc/redis/secrets/password) redis-cli -p 6379</code></pre>
   <h2>Recovery</h2>
   <p>A restart recovers from the append-only file, proven on every converge. RDB sets land every six hours under <code>redis-aws/redis/</code> in the backup bucket with completion markers; <code>./green rehearse</code> restores the newest into a scratch instance of the pinned image, reads the smoke key back, and writes <code>.colors-recovery-verified</code>.</p>
   <p><a href="https://github.com/getcolors/redis-aws">Source on GitHub</a> · <a href="https://github.com/getcolors/redis">The redis Package Skill</a></p>
