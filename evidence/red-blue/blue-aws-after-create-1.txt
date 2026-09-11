@@ -1,0 +1,139 @@
+# aws verification (blue-after-create-1) 2026-09-11T04:57:11Z account 251213589273
+## EC2 instances (Name=redis-aws*)
+[
+    {
+        "id": "i-0efea601df0eabf8f",
+        "state": "running",
+        "type": "t3.small",
+        "ami": "ami-025d99823a4caad37",
+        "az": "us-east-1a",
+        "ip": "34.207.81.88",
+        "key": "redis-aws",
+        "vpc": "vpc-04b5b969575405b92",
+        "subnet": "subnet-04504d2ee56e7cbe4",
+        "sgs": [
+            "sg-004492a90902d9c9d"
+        ],
+        "root": [
+            "vol-07cd51d8b1893c0a7"
+        ],
+        "launched": "2026-09-11T04:54:11+00:00"
+    },
+    {
+        "id": "i-0b35043221dc5d750",
+        "state": "terminated",
+        "type": "t3.small",
+        "ami": "ami-025d99823a4caad37",
+        "az": "us-east-1a",
+        "ip": null,
+        "key": "redis-aws",
+        "vpc": null,
+        "subnet": null,
+        "sgs": [],
+        "root": [],
+        "launched": "2026-09-11T04:36:34+00:00"
+    },
+    {
+        "id": "i-069d0643337a3edd3",
+        "state": "terminated",
+        "type": "t3.small",
+        "ami": "ami-025d99823a4caad37",
+        "az": "us-east-1a",
+        "ip": null,
+        "key": "redis-aws",
+        "vpc": null,
+        "subnet": null,
+        "sgs": [],
+        "root": [],
+        "launched": "2026-09-11T03:40:54+00:00"
+    }
+]
+## root volumes of those instances
+vol-07cd51d8b1893c0a7	20	gp3	True
+## security groups (redis-aws*)
+[
+    {
+        "id": "sg-004492a90902d9c9d",
+        "name": "redis-aws-firewall",
+        "vpc": "vpc-04b5b969575405b92",
+        "ingress": [
+            {
+                "proto": "tcp",
+                "from": 22,
+                "to": 22,
+                "cidrs": [
+                    "0.0.0.0/0"
+                ]
+            }
+        ],
+        "egress": [
+            {
+                "proto": "-1",
+                "cidrs": [
+                    "0.0.0.0/0"
+                ]
+            }
+        ]
+    }
+]
+## VPCs / subnets / igws (Name=redis-aws*)
+vpc-04b5b969575405b92	10.79.0.0/16	available
+subnet-04504d2ee56e7cbe4	10.79.1.0/24	us-east-1a	vpc-04b5b969575405b92
+igw-08713e73ece846b7c
+## key pairs (redis-aws*)
+key-085a5306a72426a72	redis-aws	ed25519	dpwzSnuVAWIYsflQTqup9o3Jbc/b60Sh5IzItQVEgnU=
+## buckets
+redis-aws-state-251213589273-us-east-1: present
+redis-aws-backup-251213589273-us-east-1: present
+## backup bucket tagging / public access block / encryption
+{
+    "TagSet": [
+        {
+            "Key": "colors:owner",
+            "Value": "redis-storage"
+        },
+        {
+            "Key": "colors:profile",
+            "Value": "redis-aws"
+        }
+    ]
+}
+{
+    "PublicAccessBlockConfiguration": {
+        "BlockPublicAcls": true,
+        "IgnorePublicAcls": true,
+        "BlockPublicPolicy": true,
+        "RestrictPublicBuckets": true
+    }
+}
+{
+    "ServerSideEncryptionConfiguration": {
+        "Rules": [
+            {
+                "ApplyServerSideEncryptionByDefault": {
+                    "SSEAlgorithm": "AES256"
+                },
+                "BucketKeyEnabled": false,
+                "BlockedEncryptionTypes": {
+                    "EncryptionType": [
+                        "SSE-C"
+                    ]
+                }
+            }
+        ]
+    }
+}
+## IAM user redis-aws-storage-backup
+redis-aws-storage-backup	arn:aws:iam::251213589273:user/redis-aws-storage-backup	2026-09-11T04:54:40+00:00
+POLICYNAMES	redis-bucket
+Active	2026-09-11T04:54:42+00:00
+## backup bucket objects
+redis-aws/redis/20260911T045644Z/.complete	16	2026-09-11T04:56:51+00:00
+redis-aws/redis/20260911T045644Z/dump.rdb	248	2026-09-11T04:56:50+00:00
+redis-aws/redis/20260911T045644Z/manifest.txt	272	2026-09-11T04:56:50+00:00
+## state bucket objects
+_colors/backend-owner.json	173
+redis-aws/compute/coordination.json	731
+redis-aws/compute/nodes/0.tfstate	3694
+redis-aws/compute/shared.tfstate	9919
+redis-aws/redis-storage.tfstate	6003

@@ -1,0 +1,38 @@
+# offline parity of the rendered .colors/redis-aws/ tree, 2026-09-11T04:34:19Z
+# each colour rendered into an empty .colors/redis-aws/ (rm -rf, then <colour> build), snapshot, then diff -r
+## green: 22 files
+## red: 22 files
+## blue: 22 files
+## diff -r green red
+rc=0
+## diff -r green blue
+rc=0
+## diff -r red blue
+rc=0
+## sha256 of every rendered file (green; red and blue identical per the diffs)
+b9b1444907a5be80c22722b9f842183a99e5d160119d8ef4d45b6902f2551f08  ./redis-ansible-local/ansible.cfg
+a345c4803319cfeaf0d8e717e7a95620a34c5a9a2b8a1b1f81ae8a134a0ed362  ./redis-ansible-local/inventory.ini
+948763989d73220f4d6673e717b2d2d94d8315425d40e7c54fb909f3ca1e8a43  ./redis-ansible-local/main.yml
+6549f307cf74dd38d09ca95972aebbc087e22b1cb32cef397697eca08dde2a38  ./redis-ansible/ansible.cfg
+7540d0e193fd0dd896431af9cab603051b6754889c0fb5ce03b30dff11214ecb  ./redis-ansible/cleanup.yml
+7377a01f42f8f232852aaa24678f379741a2a637a0c12d41b39b31de40c767f9  ./redis-ansible/compose.yml
+6a8eb90b3156f2c9540ecffb8b6c11e25c3fa0cd008a2a63e988eec44ce80723  ./redis-ansible/inventory.json
+c1b94fd51461653ac713eeb9822ecbeac857afe8fbecb84b8cb6ded221bc0bd6  ./redis-ansible/main.yml
+509fd522dbdc7614b152a0e8298a67294f78858fb2c710ea83306482bc7e324d  ./redis-ansible/r2-env.sh
+ee4aef6dcacc1b9965e0dec5114d117dd579c7a2f04d64bcc97f0155bc1ec5c5  ./redis-ansible/redis-backup.sh
+cc48c0fac45e1166115005b41eaaba146b143f11a5873611e0ce092b7ff7510d  ./redis-ansible/redis-monitor.sh
+c9e8241437a418c3bab3fd7e81cd4f42e8e8d1b723821f9497f561d5d29c6a1b  ./redis-ansible/redis-restore-check.sh
+9b104a690c1d6d05f3b6a99c33d89f788d064d34f5dddba1e3ad4fd5a59f2787  ./redis-ansible/redis-smoke.sh
+8ecf9907e62368f1f2cba3232bc1870cdea303a970252862ee05d5e2e6451557  ./redis-ansible/redis-status.sh
+ea710ef61819a8de4fe3bb1d7aa3f6f6a05a126092799697b81d6d3c9def73c7  ./redis-ansible/rehearsal.yml
+bbc3f990743f1928a1c062353bee6722d6aa5b72ca173f4fef7014c15b5b7475  ./redis-infrastructure/nodes/0/backend.tf.json
+37d4639087bb0d6caa5b051e15fb1a14bd50de194e9acf118dc5cbd6180c1f86  ./redis-infrastructure/nodes/0/node.tf.json
+3f23935936412a34a6ba7b4c9206363a8ae2466153e1d6a77375526cd860ff29  ./redis-infrastructure/shared/backend.tf.json
+26c0a77a312cec114b2e6af586fce8f0902e6e28e635e60a26f7509b0c2a2a75  ./redis-infrastructure/shared/shared-keygen.tf.json
+9bc7df42632b3c67d91ea5b2b714c24387b137090b32b8ec5bcf79d6b8efb979  ./redis-infrastructure/shared/shared.tf.json
+0583a98a09e3a8d61477e7041655a00057dd1a25a6b7bb51ab8dd4eb426db3a8  ./redis-storage/backend.tf.json
+bffc890a20d95017d12fea926f8b820e219b5550d5a5e527d74c20765e02128b  ./redis-storage/main.tf
+## credential scan of the three trees
+files matching AKIA / aws_secret / SECRET_ACCESS_KEY=: 6 (2 per colour) -- every match is a variable reference,
+not a value: main.yml lookup('env','COLORS_PAR_REDIS_BACKUP_R2_SECRET_ACCESS_KEY') and its non-empty check, r2-env.sh sed of /etc/colors/backup-r2.env
+literal AKIA ids: 0; literal secrets: 0

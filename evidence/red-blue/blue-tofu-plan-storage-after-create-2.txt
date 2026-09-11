@@ -1,0 +1,4 @@
+# tofu plan of the storage stage after blue create 2, 2026-09-11T05:01:41Z (expects: No changes.)
+init exit=0
+No changes. Your infrastructure matches the configuration.
+plan exit=0 (0 = no changes, 2 = changes)

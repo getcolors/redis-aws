@@ -1,0 +1,7 @@
+# plain ./blue delete without the override, 2026-09-11T05:03:32Z (must be refused, exit 2)
+compute destruction is protected; set COLORS_PAR_COMPUTE_PREVENT_DESTROY=false to delete
+>>> redis/start (delete)
+<<< redis/start (1ms)
+EXIT=2
+-- instance still running?
+running

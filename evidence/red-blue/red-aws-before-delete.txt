@@ -1,0 +1,132 @@
+# aws verification (red-before-delete) 2026-09-11T04:46:45Z account 251213589273
+## EC2 instances (Name=redis-aws*)
+[
+    {
+        "id": "i-0b35043221dc5d750",
+        "state": "running",
+        "type": "t3.small",
+        "ami": "ami-025d99823a4caad37",
+        "az": "us-east-1a",
+        "ip": "100.61.147.73",
+        "key": "redis-aws",
+        "vpc": "vpc-06a4d65a5c749d722",
+        "subnet": "subnet-04edf9963c4e83267",
+        "sgs": [
+            "sg-0f025bd6f74a5bde8"
+        ],
+        "root": [
+            "vol-0eeb166c3da741534"
+        ],
+        "launched": "2026-09-11T04:36:34+00:00"
+    },
+    {
+        "id": "i-069d0643337a3edd3",
+        "state": "terminated",
+        "type": "t3.small",
+        "ami": "ami-025d99823a4caad37",
+        "az": "us-east-1a",
+        "ip": null,
+        "key": "redis-aws",
+        "vpc": null,
+        "subnet": null,
+        "sgs": [],
+        "root": [],
+        "launched": "2026-09-11T03:40:54+00:00"
+    }
+]
+## root volumes of those instances
+vol-0eeb166c3da741534	20	gp3	True
+## security groups (redis-aws*)
+[
+    {
+        "id": "sg-0f025bd6f74a5bde8",
+        "name": "redis-aws-firewall",
+        "vpc": "vpc-06a4d65a5c749d722",
+        "ingress": [
+            {
+                "proto": "tcp",
+                "from": 22,
+                "to": 22,
+                "cidrs": [
+                    "0.0.0.0/0"
+                ]
+            }
+        ],
+        "egress": [
+            {
+                "proto": "-1",
+                "cidrs": [
+                    "0.0.0.0/0"
+                ]
+            }
+        ]
+    }
+]
+## VPCs / subnets / igws (Name=redis-aws*)
+vpc-06a4d65a5c749d722	10.79.0.0/16	available
+subnet-04edf9963c4e83267	10.79.1.0/24	us-east-1a	vpc-06a4d65a5c749d722
+igw-013e1433d2ef5247c
+## key pairs (redis-aws*)
+key-09f60c14fbb9c8441	redis-aws	ed25519	3C6URP9NQsJQCIBUgINmf36R/JA2rUjMnjj8jDP5VHA=
+## buckets
+redis-aws-state-251213589273-us-east-1: present
+redis-aws-backup-251213589273-us-east-1: present
+## backup bucket tagging / public access block / encryption
+{
+    "TagSet": [
+        {
+            "Key": "colors:owner",
+            "Value": "redis-storage"
+        },
+        {
+            "Key": "colors:profile",
+            "Value": "redis-aws"
+        }
+    ]
+}
+{
+    "PublicAccessBlockConfiguration": {
+        "BlockPublicAcls": true,
+        "IgnorePublicAcls": true,
+        "BlockPublicPolicy": true,
+        "RestrictPublicBuckets": true
+    }
+}
+{
+    "ServerSideEncryptionConfiguration": {
+        "Rules": [
+            {
+                "ApplyServerSideEncryptionByDefault": {
+                    "SSEAlgorithm": "AES256"
+                },
+                "BucketKeyEnabled": false,
+                "BlockedEncryptionTypes": {
+                    "EncryptionType": [
+                        "SSE-C"
+                    ]
+                }
+            }
+        ]
+    }
+}
+## IAM user redis-aws-storage-backup
+redis-aws-storage-backup	arn:aws:iam::251213589273:user/redis-aws-storage-backup	2026-09-11T04:37:12+00:00
+POLICYNAMES	redis-bucket
+Active	2026-09-11T04:37:14+00:00
+## backup bucket objects
+redis-aws/.colors-recovery-verified	50	2026-09-11T04:46:00+00:00
+redis-aws/redis/20260911T043909Z/.complete	16	2026-09-11T04:39:17+00:00
+redis-aws/redis/20260911T043909Z/dump.rdb	248	2026-09-11T04:39:16+00:00
+redis-aws/redis/20260911T043909Z/manifest.txt	272	2026-09-11T04:39:16+00:00
+redis-aws/redis/20260911T044353Z/.complete	16	2026-09-11T04:44:01+00:00
+redis-aws/redis/20260911T044353Z/dump.rdb	288	2026-09-11T04:44:01+00:00
+redis-aws/redis/20260911T044353Z/manifest.txt	272	2026-09-11T04:44:01+00:00
+redis-aws/redis/20260911T044548Z/.complete	16	2026-09-11T04:45:55+00:00
+redis-aws/redis/20260911T044548Z/dump.rdb	288	2026-09-11T04:45:54+00:00
+redis-aws/redis/20260911T044548Z/manifest.txt	272	2026-09-11T04:45:54+00:00
+## state bucket objects
+_colors/backend-owner.json	161
+redis-aws/compute/coordination.json	732
+redis-aws/compute/nodes/0.tfstate	3695
+redis-aws/compute/shared.tfstate	10584
+redis-aws/redis-storage.tfstate	6003

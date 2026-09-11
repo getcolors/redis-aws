@@ -1,0 +1,45 @@
+# backup sets after red create 1, 2026-09-11T04:40:39Z
+redis-aws/redis/20260911T043909Z/.complete	16
+redis-aws/redis/20260911T043909Z/dump.rdb	248
+redis-aws/redis/20260911T043909Z/manifest.txt	272
+newest marker: redis-aws/redis/20260911T043909Z/.complete
+marker content: 20260911T043916Z
+-- manifest
+stamp=20260911T043909Z
+profile=redis-aws
+image=docker.io/library/redis:7.2.16@sha256:74566c6910d13ae61e7ce73ebd3127438a1fe805b309b097c323142719ec8a5b
+redis_version=7.2.16
+dbsize=1
+dump_sha256=5ed1e49b3f3540f5ee8d87a685f2ae44dbfa426e890dc2ff10e8b146994de651
+dump_bytes=248
+
+-- IAM inline policy redis-bucket
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Action": [
+                "s3:ListBucket",
+                "s3:GetBucketLocation",
+                "s3:ListBucketMultipartUploads"
+            ],
+            "Effect": "Allow",
+            "Resource": [
+                "arn:aws:s3:::redis-aws-backup-251213589273-us-east-1"
+            ]
+        },
+        {
+            "Action": [
+                "s3:GetObject",
+                "s3:PutObject",
+                "s3:DeleteObject",
+                "s3:AbortMultipartUpload",
+                "s3:ListMultipartUploadParts"
+            ],
+            "Effect": "Allow",
+            "Resource": [
+                "arn:aws:s3:::redis-aws-backup-251213589273-us-east-1/*"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,9 @@
+start 2026-09-11T05:03:14Z pin ffb0777 colour blue (describe after rehearse)
+>>> redis/start (describe)
+<<< redis/start (1ms)
+>>> redis/load-infrastructure (describe)
+<<< redis/load-infrastructure (15642ms)
+>>> redis/describe (describe)
+redis-aws                        ok         2026-09-11T05:01:13Z
+<<< redis/describe (1671ms)
+EXIT=0 ELAPSED=18s end 2026-09-11T05:03:32Z

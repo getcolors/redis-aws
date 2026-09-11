@@ -1,0 +1,14 @@
+# recovery marker and sets after blue rehearse 1, 2026-09-11T05:03:00Z
+redis-aws/.colors-recovery-verified	50	2026-09-11T05:02:53+00:00
+redis-aws/redis/20260911T045644Z/.complete	16	2026-09-11T04:56:51+00:00
+redis-aws/redis/20260911T045644Z/dump.rdb	248	2026-09-11T04:56:50+00:00
+redis-aws/redis/20260911T045644Z/manifest.txt	272	2026-09-11T04:56:50+00:00
+redis-aws/redis/20260911T050105Z/.complete	16	2026-09-11T05:01:11+00:00
+redis-aws/redis/20260911T050105Z/dump.rdb	288	2026-09-11T05:01:11+00:00
+redis-aws/redis/20260911T050105Z/manifest.txt	272	2026-09-11T05:01:11+00:00
+redis-aws/redis/20260911T050241Z/.complete	16	2026-09-11T05:02:48+00:00
+redis-aws/redis/20260911T050241Z/dump.rdb	288	2026-09-11T05:02:47+00:00
+redis-aws/redis/20260911T050241Z/manifest.txt	272	2026-09-11T05:02:47+00:00
+-- marker head-object
+50	2026-09-11T05:02:53+00:00	AES256
+-- marker content: redis-aws set=20260911T050241Z at=20260911T050252Z

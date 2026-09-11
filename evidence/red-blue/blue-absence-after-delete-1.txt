@@ -1,0 +1,16 @@
+# absence checks (blue-after-delete-1) 2026-09-11T05:07:51Z, account 251213589273
+instance i-0efea601df0eabf8f: terminated
+vpc vpc-04b5b969575405b92: aws: [ERROR]: An error occurred (InvalidVpcID.NotFound) when calling the DescribeVpcs operation: The vpc ID 'vpc-04b5b969575405b92' does not exist
+subnet subnet-04504d2ee56e7cbe4: aws: [ERROR]: An error occurred (InvalidSubnetID.NotFound) when calling the DescribeSubnets operation: The subnet ID 'subnet-04504d2ee56e7cbe4' does not exist
+igw igw-08713e73ece846b7c: aws: [ERROR]: An error occurred (InvalidInternetGatewayID.NotFound) when calling the DescribeInternetGateways operation: The internetGateway ID 'igw-08713e73ece846b7c' does not exist
+sg sg-004492a90902d9c9d: aws: [ERROR]: An error occurred (InvalidGroup.NotFound) when calling the DescribeSecurityGroups operation: The security group 'sg-004492a90902d9c9d' does not exist
+key pair redis-aws: aws: [ERROR]: An error occurred (InvalidKeyPair.NotFound) when calling the DescribeKeyPairs operation: The key pair 'redis-aws' does not exist
+volume vol-07cd51d8b1893c0a7: aws: [ERROR]: An error occurred (InvalidVolume.NotFound) when calling the DescribeVolumes operation: The volume 'vol-07cd51d8b1893c0a7' does not exist.
+iam user redis-aws-storage-backup: aws: [ERROR]: An error occurred (NoSuchEntity) when calling the GetUser operation: The user with name redis-aws-storage-backup cannot be found.
+head-bucket redis-aws-state-251213589273-us-east-1: exit=254 aws: [ERROR]: An error occurred (404) when calling the HeadBucket operation: Not Found
+head-bucket redis-aws-backup-251213589273-us-east-1: exit=254 aws: [ERROR]: An error occurred (404) when calling the HeadBucket operation: Not Found
+buckets named redis-aws*: []
+instances tagged Name=redis-aws (any state): i-0efea601df0eabf8f terminated i-0b35043221dc5d750 terminated i-069d0643337a3edd3 terminated 
+vpcs/sgs/keypairs/volumes named redis-aws*: [] [] [] []
+iam users named redis-aws*: []
+local: redis-aws blocks in ~/.ssh/config = 0; Host stanzas = 6; key files: ls: cannot access '/home/ubuntu/.ssh/redis-aws*': No such file or directory 

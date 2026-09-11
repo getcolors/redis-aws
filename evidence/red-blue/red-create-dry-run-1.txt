@@ -1,0 +1,13 @@
+# /home/ubuntu/code/getcolors/redis-aws/red create --dry-run (cwd /home/ubuntu/code/getcolors/redis-aws), 2026-09-11T04:33:45Z
+>>> redis/start (create)
+<<< redis/start (1ms)
+dry-run: would run redis/infrastructure (create)
+dry-run: would run redis/storage (create)
+dry-run: would run redis/ssh-config (create)
+dry-run: would run redis/ansible (create)
+dry-run: would run redis/acceptance (create)
+
+real	0m0.408s
+user	0m0.256s
+sys	0m0.196s
+EXIT=0

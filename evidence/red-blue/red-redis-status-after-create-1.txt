@@ -1,0 +1,19 @@
+# redis-status over the alias after red create 1, 2026-09-11T04:40:46Z
+== monitor ==
+{"checked": "2026-09-11T04:39:18Z", "healthy": true, "problems": []}
+== backup sets in redis-aws-backup-251213589273-us-east-1/redis-aws/redis (completed, newest last) ==
+20260911T043909Z
+
+== recovery marker ==
+.colors-recovery-verified    absent
+
+== container ==
+redis-redis-1 running Up About a minute (healthy)
+
+== connect ==
+from your workstation:
+  ssh -L 6379:127.0.0.1:6379 redis-aws
+  REDISCLI_AUTH=$(ssh redis-aws sudo -n cat /etc/redis/secrets/password) redis-cli -p 6379
+the generated password lives on this host only:
+  /etc/redis/secrets/password
+exit=0

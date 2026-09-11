@@ -1,18 +1,22 @@
-# Live verification: redis-aws (green)
+# Live verification: redis-aws (green, red, blue)
 
 Verified on 2026-09-11 against AWS account 251213589273, us-east-1, with
-the green launcher of the `redis` Package Skill. The whole lifecycle ran for
-real: three converges, describe, one recovery rehearsal, describe again, a
+all three launchers of the `redis` Package Skill. Green went first (this
+section); the red and blue launchers then each ran the same lifecycle on the
+same pin from the same checkout (the section at the end). Every lifecycle ran
+for real: converges, describe, one recovery rehearsal, describe again, a
 refused delete, an authorized delete, and a repeat delete. The deployment is
 gone; the final audit found nothing for this profile in the account or on the
 workstation.
+
+## Green
 
 Four package bugs surfaced, each on the first run of a different verb, and
 each was fixed at the source, tested, pushed, pinned, and the payload
 refreshed before the verb was re-run. The last live-verified green pin is
 `ffb0777` (`getcolors/redis` main, pinned by `7ce215e`).
 
-## Runs
+### Runs
 
 Toolchain from `devenv`: OpenTofu 1.12.5, ansible-core 2.21.3, awscli 2.35.11,
 redis-cli 8.10.1, babashka 1.13.219 (`devenv.lock` is tracked for this reason).
@@ -40,7 +44,7 @@ Logs: `evidence/live-create-1.txt`, `live-create-1-retry.txt`,
 `live-delete-2.txt`. Launcher logs carry step markers only; tool output was
 taken directly where it mattered.
 
-## What existed
+### What existed
 
 One `t3.small` (`i-069d0643337a3edd3`, `ami-025d99823a4caad37`,
 `us-east-1a`, launched 03:40:54Z on the very first, failed create and kept
@@ -67,7 +71,7 @@ Inventories: `evidence/aws-after-create-1.txt`, `aws-after-create-2.txt`,
 `aws-before-delete.txt`, `security-group-after-create-1.txt`,
 `ssh-config-after-create-1.txt`, `container-after-create-1.txt`.
 
-## What each gate proved
+### What each gate proved
 
 - **Acceptance (every passing create).** The tunnel through the generated
   alias round-trips with the generated password, an anonymous `PING` and a
@@ -108,7 +112,7 @@ Inventories: `evidence/aws-after-create-1.txt`, `aws-after-create-2.txt`,
   repeat delete exits 0 in 5 s. Final audit after it:
   `evidence/absence-final.txt`, `aws-after-delete-2.txt`.
 
-## Bugs found and fixed
+### Bugs found and fixed
 
 All four are in `getcolors/redis`; each fix carries a unit test, passed
 `bb test`, `bb golden`, `bb syntax`, `scripts/launcher.sh` and
@@ -153,11 +157,11 @@ main during this run), and was pinned with `bb pin`.
 
 The payload was refreshed after every pin (`npx skills update -p`, root
 launcher re-copied and diffed against the payload): commits `87a2184`,
-`85be413`, `8b52dea`, `3b57d03`. Only the green payload is installed here;
-the red and blue payloads exist on main since `daa6811` and were not
-installed or live-run from this deployment.
+`85be413`, `8b52dea`, `3b57d03`. The green run used only the green payload;
+the red and blue payloads were installed afterwards (`dafee99`) and
+live-run below.
 
-## Oddities worth knowing
+### Oddities worth knowing
 
 - The very first create failed after creating the instance, and every later
   create adopted it cleanly: the compute library's ownership coordination
@@ -173,3 +177,147 @@ installed or live-run from this deployment.
 - `evidence/` holds no credential: `evidence/credential-scan.txt`. One tofu
   plan echoed the storage user's access key **id**; it is redacted, and the
   key was destroyed with the user.
+
+## Red and blue
+
+Run after the green lifecycle, on the same day, from the same checkout, at
+the same pin `ffb0777` in all three payloads. `npx -y skills add
+getcolors/redis -y` installed `package-redis-red` and `package-redis-blue`
+beside the green payload (`skills-lock.json` now lists all three; the
+`.claude/skills/` symlinks point at `.agents/skills/`), and the root `./red`
+and `./blue` are byte-identical copies of their payloads and of
+`getcolors/redis` `skills/package-redis-{red,blue}/` at `7ce215e` (commit
+`dafee99`). Toolchain as above plus bun 1.3.13 and uv 0.12.5 from `devenv`.
+Evidence under `evidence/red-blue/`, one file per step, `<colour>-` prefixed.
+
+**No package bug surfaced.** Every verb of both colours passed on its first
+run; nothing was fixed, re-pinned or refreshed during this part.
+
+### Offline
+
+`build`, `create --dry-run` and `delete --dry-run` exit 0 for both colours
+(`red-build-1.txt`, `red-create-dry-run-1.txt`, `red-delete-dry-run-1.txt`
+and the `blue-` equivalents), and each walks exactly green's DAG: create is
+start, infrastructure, storage, ssh-config, ansible, acceptance; delete is
+start, load-infrastructure, ansible, ssh-config, infrastructure, storage,
+backend-finalize. The first `./red` run resolved its pinned dependencies in
+under two seconds (bun's cache already held them); `./blue` installed nine
+packages on its first run.
+
+**Parity.** Each colour rendered into an emptied `.colors/redis-aws/`
+(`rm -rf`, then `<colour> build`), the tree was snapshotted, and `diff -r`
+of green against red, green against blue and red against blue is empty: 22
+files each, sha256 per file recorded, no credential in any of them
+(`offline-parity.txt`). The clean render matters: a build over an existing
+tree overwrites in place, so a stale file from another colour would mask a
+missing one.
+
+### Runs
+
+| # | Verb | Red exit | Red wall | Blue exit | Blue wall | Outcome |
+|---|---|---|---|---|---|---|
+| 1 | `create` | 0 | 282 s | 0 | 280 s | first converge, acceptance included; instance, network, key pair, both buckets, IAM user, first backup set |
+| 2 | `create` | 0 | 197 s | 0 | 195 s | idempotent (below) |
+| — | `describe` | 0 | 18 s | 0 | 17 s | `redis-aws ok` |
+| — | `rehearse` | 0 | 34 s | 0 | 36 s | fresh set, scratch restore, marker written |
+| — | `describe` | 0 | 18 s | 0 | 18 s | ok |
+| — | `delete` (no override) | 2 | 1 s | 2 | 1 s | refused: `compute destruction is protected`; instance still running |
+| D1 | `delete` (override) | 0 | 203 s | 0 | 205 s | ansible, ssh-config, infrastructure, storage, backend-finalize |
+| D2 | `delete` (override) | 0 | 4 s | 0 | 4 s | inspection routes straight to the finalizer, which proves absence |
+
+Logs: `red-create-1.txt` … `red-delete-2.txt` and the `blue-` set. Wall
+times match green's (197/193/195 s converges, 208 s delete) within a few
+seconds; the two first converges took ~85 s longer than green's third
+because each created the instance, the buckets and the IAM user from
+nothing.
+
+### What existed
+
+Red: `t3.small` `i-0b35043221dc5d750` (`ami-025d99823a4caad37`,
+`us-east-1a`, launched 04:36:34Z), volume `vol-0eeb166c3da741534` (20 GiB
+gp3, encrypted), public IP `100.61.147.73`, VPC `vpc-06a4d65a5c749d722`
+(`10.79.0.0/16`), subnet `subnet-04edf9963c4e83267`, `igw-013e1433d2ef5247c`,
+security group `sg-0f025bd6f74a5bde8` (`redis-aws-firewall`, ingress
+22/tcp from 0.0.0.0/0 only), key pair `key-09f60c14fbb9c8441`
+(`redis-aws`, ed25519), IAM user `redis-aws-storage-backup` (created
+04:37:12Z, inline policy `redis-bucket` scoped to the backup bucket, one
+active key), both buckets with the same tags, public-access block and
+AES256 rule green had (`red-aws-after-create-1.txt`,
+`red-aws-before-delete.txt`).
+
+Blue: `i-0efea601df0eabf8f` (launched 04:54:11Z), `vol-07cd51d8b1893c0a7`,
+public IP `34.207.81.88`, `vpc-04b5b969575405b92`,
+`subnet-04504d2ee56e7cbe4`, `igw-08713e73ece846b7c`,
+`sg-004492a90902d9c9d`, key pair `key-085a5306a72426a72`, IAM user
+recreated 04:54:40Z, both buckets recreated (`blue-aws-after-create-1.txt`,
+`blue-aws-before-delete.txt`). Host in both cases: Ubuntu 24.04.4, `ufw`
+inactive, container `redis-redis-1` on the pinned digest, kernel listener
+list exactly `127.0.0.1:6379` (`*-container-after-create-1.txt`).
+
+Workstation: the `redis-aws` block at the top of `~/.ssh/config` (`User
+ubuntu`, `IdentityFile ~/.ssh/redis-aws`, `IdentitiesOnly yes`), key files
+mode 600 (`*-ssh-config-after-create-1.txt`).
+
+### What each gate proved, per colour
+
+- **Acceptance.** Both first creates passed the acceptance step (8.7 s red,
+  9.1 s blue): tunnel round-trip, anonymous and wrong-password refusals,
+  public port closed. Independently, the bounded probe to `<ip>:6379`
+  timed out (exit 124) while port 22 opened (`*-public-port-probe-1.txt`).
+- **First backup set.** `redis-aws/redis/20260911T043909Z/` (red) and
+  `…T045644Z/` (blue): `dump.rdb` 248 bytes, `manifest.txt` (`dbsize=1`,
+  sha256, pinned image), 16-byte `.complete` written last; marker and
+  manifest read back with the AWS CLI (`*-backup-sets-after-create-1.txt`);
+  `redis-status` over the alias lists the set and a healthy monitor result.
+- **Idempotence.** Instance id, launch time, key pair id and fingerprint,
+  subnet, volume and public IP identical across both creates of each
+  colour; `~/.ssh/config` mtime unchanged by run 2; the container's
+  `CreatedAt` unchanged while `StartedAt` moved (the smoke gate's restart);
+  one new completed set per converge
+  (`*-idempotence-after-create-2.txt`). The storage stage plans `No
+  changes.` after run 2 in both colours, `-detailed-exitcode` 0
+  (`*-tofu-plan-storage-after-create-2.txt`) — the drift fix (bug 3 above)
+  holds in red and blue, whose resource trees are green's byte for byte.
+- **Rehearsal.** Red: fresh set `20260911T044548Z` (288 bytes), marker
+  `redis-aws set=20260911T044548Z at=20260911T044559Z` (50 bytes, AES256).
+  Blue: set `20260911T050241Z`, marker `redis-aws set=20260911T050241Z
+  at=20260911T050252Z`. Both read back with the AWS CLI and through
+  `redis-status` (`*-recovery-marker-after-rehearse-1.txt`,
+  `*-redis-status-after-rehearse-1.txt`).
+- **Guard.** Plain `delete` exits 2 at the start step in both colours, the
+  instance still `running` afterwards (`*-delete-guard.txt`).
+- **Delete.** Instance terminated; VPC, subnet, internet gateway, security
+  group, key pair, volume and IAM user all `NotFound`; `head-bucket` 404 on
+  both buckets (exit 254); no `redis-aws*` bucket, VPC, group, key pair,
+  volume or IAM user by name; no `redis-aws` block or key files on the
+  workstation (`red-absence-after-delete-1.txt`,
+  `blue-absence-after-delete-1.txt`). The repeat deletes took the
+  finalize-only route (load-infrastructure 1.1 s, backend-finalize 2.2 s),
+  exactly green's `live-delete-2.txt`. Final audit after the last delete:
+  `absence-final.txt`. The three terminated instance records
+  (`i-069d0643337a3edd3`, `i-0b35043221dc5d750`, `i-0efea601df0eabf8f`)
+  are AWS's post-termination retention and hold no resources.
+
+### Oddities worth knowing
+
+- **The launcher finds `colors.yml` by walking up from the cwd, not from
+  its own path.** A first attempt at the red and blue offline gates ran
+  from the `redis` package checkout with the deployment launcher's absolute
+  path; the runs rendered the package's own `colors.yml` (`redis-example`,
+  no managed storage) into the gitignored `redis/.colors/` and the dry-runs
+  showed no storage step. That looked like a port bug for a few minutes and
+  was not one: the same commands from the deployment directory walk green's
+  DAG exactly. The stray render was removed. Every launcher command here
+  is `cd <deployment> && direnv exec <deployment> ./<colour> …`.
+- Blue writes the guard's refusal to stderr before the step markers reach
+  stdout when both are redirected to one file (`blue-delete-guard.txt`);
+  green and red print the markers first. Cosmetic; the exit code and the
+  message are the same.
+- The storage plans left a `.terraform/` provider directory in
+  `.colors/redis-aws/redis-storage/`; it is generated output, gitignored,
+  and the next build renders over it.
+- `evidence/red-blue/` holds no credential: `red-blue/credential-scan.txt`
+  (AWS key patterns, the operator pair by value, `COLORS_PAR_` values,
+  `REDISCLI_AUTH=` literals, password-looking tokens, long tokens — the
+  only 40+ character strings are the two destroyed key pairs' public
+  fingerprints).

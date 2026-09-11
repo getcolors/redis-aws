@@ -1,0 +1,11 @@
+# compute identity after red create 2, 2026-09-11T04:44:29Z (must equal red-aws-after-create-1)
+i-0b35043221dc5d750	2026-09-11T04:36:34+00:00	redis-aws	subnet-04edf9963c4e83267	vol-0eeb166c3da741534	100.61.147.73
+key-09f60c14fbb9c8441	3C6URP9NQsJQCIBUgINmf36R/JA2rUjMnjj8jDP5VHA=
+-- ~/.ssh/config mtime (run 2 started 04:40:56Z = 06:40:56 +0200; unchanged means blockinfile did not rewrite)
+2026-09-11 06:37:18.574908613 +0200 /home/ubuntu/.ssh/config
+redis-aws blocks: 1
+-- container
+created=2026-09-11T04:38:42.264580131Z started=2026-09-11T04:43:41.564974421Z restarts=0 status=running
+-- backup sets (one per converge)
+redis-aws/redis/20260911T043909Z/.complete
+redis-aws/redis/20260911T044353Z/.complete

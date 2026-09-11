@@ -1,0 +1,8 @@
+start 2026-09-11T04:45:25Z pin ffb0777 colour red (recovery rehearsal)
+>>> redis/start (rehearse)
+<<< redis/start (1ms)
+>>> redis/load-infrastructure (rehearse)
+<<< redis/load-infrastructure (18186ms)
+>>> redis/rehearsal (rehearse)
+<<< redis/rehearsal (16163ms)
+EXIT=0 ELAPSED=34s end 2026-09-11T04:45:59Z

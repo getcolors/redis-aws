@@ -1,0 +1,18 @@
+# ~/.ssh/config block after blue create 1, 2026-09-11T04:57:40Z
+redis-aws blocks: 1
+Host stanzas: 7
+# BEGIN redis-aws ANSIBLE MANAGED BLOCK
+Host redis-aws
+    HostName <public ip, see inventory>
+    User ubuntu
+    Port 22
+    IdentityFile ~/.ssh/redis-aws
+    IdentitiesOnly yes
+    StrictHostKeyChecking accept-new
+    ForwardAgent no
+# END redis-aws ANSIBLE MANAGED BLOCK
+-- key files
+-rw------- /home/ubuntu/.ssh/redis-aws
+-rw------- /home/ubuntu/.ssh/redis-aws.pub
+-- mtime
+2026-09-11 06:54:46.265414990 +0200 /home/ubuntu/.ssh/config

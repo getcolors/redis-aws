@@ -1,0 +1,13 @@
+# redis-status over the alias after blue create 1, 2026-09-11T04:57:40Z
+== monitor ==
+{"checked": "2026-09-11T04:56:52Z", "healthy": true, "problems": []}
+== backup sets in redis-aws-backup-251213589273-us-east-1/redis-aws/redis (completed, newest last) ==
+20260911T045644Z
+
+== recovery marker ==
+.colors-recovery-verified    absent
+
+== container ==
+redis-redis-1 running Up About a minute (healthy)
+
+== connect ==

@@ -1,0 +1,14 @@
+# /home/ubuntu/code/getcolors/redis-aws/blue delete --dry-run (cwd /home/ubuntu/code/getcolors/redis-aws), 2026-09-11T04:33:53Z
+>>> redis/start (delete)
+<<< redis/start (1ms)
+dry-run: would run redis/load-infrastructure (delete)
+dry-run: would run redis/ansible (delete)
+dry-run: would run redis/ssh-config (delete)
+dry-run: would run redis/infrastructure (delete)
+dry-run: would run redis/storage (delete)
+dry-run: would run redis/backend-finalize (delete)
+
+real	0m3.389s
+user	0m0.473s
+sys	0m0.268s
+EXIT=0
