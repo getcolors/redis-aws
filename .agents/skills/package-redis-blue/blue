@@ -1,10 +1,10 @@
 #!/usr/bin/env -S uv run --script
 # /// script
 # requires-python = ">=3.11"
-# dependencies = ["package-redis-blue", "blue", "colors-compute-blue @ git+https://github.com/getcolors/colors-compute.git@09ec539e75dc21c4dafb019eb8f9da276e695f6f#subdirectory=blue"]
+# dependencies = ["package-redis-blue", "blue", "colors-compute-blue @ git+https://github.com/getcolors/colors-compute.git@ae28ea74962bb1897fa6365c143c1d43ac1fe095#subdirectory=blue"]
 #
 # [tool.uv.sources]
-# package-redis-blue = { git = "https://github.com/getcolors/redis.git", rev = "ffb0777f9d4099b6924b69eaf654f0c1652bfed1", subdirectory = "blue" }
+# package-redis-blue = { git = "https://github.com/getcolors/redis.git", rev = "6aeb2b00f3ccb05f47598dc93be6260a26c2840d", subdirectory = "blue" }
 # blue = { git = "https://github.com/getcolors/blue.git", rev = "290f313ead5ca162875c33a049c880da017eae09" }
 # ///
 #

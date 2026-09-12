@@ -5,19 +5,19 @@
       "source": "getcolors/redis",
       "sourceType": "github",
       "skillPath": "skills/package-redis-blue/SKILL.md",
-      "computedHash": "12fd29250ca6251ed48f54d81402f6b87bea74495548846332eeac2f5c9fad93"
+      "computedHash": "2d4ad49680681696ee438b32a0e799e6848c47119492c59a16ba85cfae6a46ff"
     },
     "package-redis-green": {
       "source": "getcolors/redis",
       "sourceType": "github",
       "skillPath": "skills/package-redis-green/SKILL.md",
-      "computedHash": "3eec8fe1ffae810abc80b2c61bab759afe8db9b2389dd6b483fd8f5ce57fb3c8"
+      "computedHash": "9454ed9f941043b36dca9493806cc07536d03b20ecb954c41969ddf79add9f45"
     },
     "package-redis-red": {
       "source": "getcolors/redis",
       "sourceType": "github",
       "skillPath": "skills/package-redis-red/SKILL.md",
-      "computedHash": "66cb9a4533c4a54b5eb37110e949a3a193a7e622bc28da996d17db5152506dcb"
+      "computedHash": "6ed6d8d21c0a59a5a0a87afcff23f76d78b1583ffcee7924c9d8b411a47f9e37"
     }
   }
 }
